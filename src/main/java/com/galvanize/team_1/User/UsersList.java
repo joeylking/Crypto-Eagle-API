@@ -27,4 +27,8 @@ public class UsersList {
                 '}';
     }
 
+    public boolean isEmpty() {
+        return this.users.isEmpty();
+    }
+
 }
