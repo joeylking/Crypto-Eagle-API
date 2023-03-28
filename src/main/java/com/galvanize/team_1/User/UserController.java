@@ -9,17 +9,16 @@ public class UserController {
 
     UserService userService;
 
-    @GetMapping("/api/login")
-    public ResponseEntity<User> loginUser(@RequestBody User login) {
-        try{
-            User user = userService.login();
+    @GetMapping("/api/getUser")
+    public ResponseEntity<User> getUser(@RequestBody User loginUser) {
+        try {
+            User user = userService.getUser(loginUser.getUserName(), loginUser.getPassword());
             return ResponseEntity.ok(user);
-        }catch (UserNotFoundException e) {
+        } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
 
     }
-
     @GetMapping("/api/searchusers")
     public ResponseEntity<UsersList> getUsers(@RequestParam(required = true) String userName) {
         UsersList searchList;
@@ -29,11 +28,10 @@ public class UserController {
                 ResponseEntity.ok(searchList);
 
     }
+    @PostMapping("/api/createUser")
+    public User createUser(@RequestBody User user) { return userService.addUser(user); }
 
-    @PostMapping("/api/createuser")
-    public User createUser(@RequestBody User user) { return userService.addUser(); }
-
-    @DeleteMapping("/api/deleteuser/{id}")
+    @DeleteMapping("/api/deleteUser/{id}")
     public ResponseEntity deleteUser(@PathVariable int id) {
         try {
             userService.deleteUser(id);
@@ -43,7 +41,7 @@ public class UserController {
         return ResponseEntity.accepted().build();
     }
 
-    @PutMapping("/api/updateuser/{id}")
+    @PutMapping("/api/updateUser/{id}")
     public User updateUser(@PathVariable int id,
                                @RequestBody User update) {
         User user = userService.updateUser(id, update.getUserName(), update.getPassword(), update.getBio());
@@ -51,4 +49,5 @@ public class UserController {
         user.setBio(update.getBio());
         return user;
     }
+
 }
