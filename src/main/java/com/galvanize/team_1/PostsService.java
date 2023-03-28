@@ -16,4 +16,7 @@ public class PostsService {
     public Post updatePost(String id, String title, String body) {
         return null;
     }
+
+    public void deletePost(String id) {
+    }
 }

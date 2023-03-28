@@ -48,5 +48,15 @@ public class PostsController {
         }
     }
 
+    @DeleteMapping("/api/posts/{id}")
+    public ResponseEntity deletePost(@PathVariable String id){
+        try{
+            postsService.deletePost(id);
+            return ResponseEntity.accepted().build();
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
 
 }
