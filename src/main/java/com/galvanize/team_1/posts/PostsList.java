@@ -1,4 +1,4 @@
-package com.galvanize.team_1;
+package com.galvanize.team_1.posts;
 
 import java.util.ArrayList;
 import java.util.List;
