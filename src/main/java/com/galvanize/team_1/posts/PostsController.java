@@ -1,10 +1,7 @@
 package com.galvanize.team_1.posts;
 
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import static org.springframework.http.ResponseEntity.ok;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -13,10 +10,14 @@ public class PostsController {
 
     PostsService postsService;
 
+    public PostsController(PostsService postsService){
+        this.postsService = postsService;
+    }
+
     @GetMapping("/api/posts")
     public ResponseEntity<PostsList> getPosts(){
-        PostsList postsList = postsService.getPosts();
-        return ResponseEntity.ok(postsList);
+        PostsList posts = postsService.getPosts();
+        return posts.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(posts);
 
     }
 

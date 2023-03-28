@@ -17,4 +17,8 @@ public class PostsList {
     public void setPosts(List<Post> posts){
         this.posts = posts;
     }
+
+    public boolean isEmpty() {
+        return this.posts.isEmpty();
+    }
 }
