@@ -2,9 +2,14 @@ package com.galvanize.team_1;
 
 public class PostsService {
 
+    PostsRepository postsRepository;
 
-    public static PostsList getPosts() {
-        return null;
+    public PostsService(PostsRepository postsRepository){
+        this.postsRepository = postsRepository;
+    }
+
+    public PostsList getPosts() {
+        return new PostsList(postsRepository.findAll());
     }
 
     public static Post getPost(String id) {
