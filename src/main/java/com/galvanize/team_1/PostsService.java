@@ -4,4 +4,6 @@ public class PostsService {
     public static PostsList getPosts() {
         return null;
     }
+
+    public Post addPost(Post post) { return null; }
 }
