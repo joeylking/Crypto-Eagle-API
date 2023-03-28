@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SavedCoinsList {
 
-    private List<SavedCoins> savedCoinsList;
+    List<SavedCoins> savedCoinsList;
 
     public SavedCoinsList(){this.savedCoinsList = new ArrayList<>();}
     public SavedCoinsList(List<SavedCoins> list){
@@ -13,7 +13,7 @@ public class SavedCoinsList {
     }
 
     public List<SavedCoins> getSavedCoinsList() {
-        return savedCoinsList;
+        return this.savedCoinsList;
     }
 
     public void setSavedCoinsList(List<SavedCoins> savedCoinsList) {

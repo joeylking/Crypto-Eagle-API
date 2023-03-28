@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000")
 public class SavedCoinsController {
 
-    private SavedCoinsService savedCoinsService;
+    SavedCoinsService savedCoinsService;
 
     public SavedCoinsController(SavedCoinsService savedCoinsService) {
         this.savedCoinsService = savedCoinsService;

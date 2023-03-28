@@ -1,29 +1,28 @@
 package com.galvanize.team_1.saved_coins;
 
-import jdk.jfr.Enabled;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name = "WatchList")
+@Table(name = "saved_coins")
 public class SavedCoins {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
     private String currencyName;
-    private String userId;
+    private int userId;
 
-    public SavedCoins(String id, String currencyName, String userId) {
-        this.id = id;
+    public SavedCoins(){}
+
+    public SavedCoins( String currencyName, int userId) {
         this.currencyName = currencyName;
         this.userId = userId;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -35,11 +34,11 @@ public class SavedCoins {
         this.currencyName = currencyName;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 }
