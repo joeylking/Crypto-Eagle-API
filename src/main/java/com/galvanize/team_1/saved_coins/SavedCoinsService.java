@@ -1,8 +1,11 @@
 package com.galvanize.team_1.saved_coins;
 
+import org.springframework.stereotype.Service;
+
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@Service
 public class SavedCoinsService {
 
     SavedCoinsRepository savedCoinsRepository;

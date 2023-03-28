@@ -5,7 +5,7 @@ import jdk.jfr.Enabled;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "savedcoins")
+@Table(name = "WatchList")
 public class SavedCoins {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
