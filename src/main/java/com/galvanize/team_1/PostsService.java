@@ -12,11 +12,13 @@ public class PostsService {
         return new PostsList(postsRepository.findAll());
     }
 
-    public static Post getPost(String id) {
-        return null;
+    public Post getPost(String id) {
+        return postsRepository.findById(id).orElse(null);
     }
 
-    public Post addPost(Post post) { return null; }
+    public Post addPost(Post post){
+        return postsRepository.save(post);
+    }
 
     public Post updatePost(String id, String title, String body) {
         return null;
