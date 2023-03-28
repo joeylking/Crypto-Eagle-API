@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.ResponseEntity.ok;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 
 public class PostsController {
@@ -30,7 +31,7 @@ public class PostsController {
         try {
             Post post = postsService.getPost(id);
             return ResponseEntity.ok(post);
-        } catch (Exception e){
+        } catch (PostNotFoundException e){
             return ResponseEntity.noContent().build();
         }
     }
@@ -43,7 +44,7 @@ public class PostsController {
             post.setTitle(update.getTitle());
             post.setBody(update.getBody());
             return ResponseEntity.ok(post);
-        } catch (Exception e){
+        } catch (PostNotFoundException e){
             return ResponseEntity.noContent().build();
         }
     }
@@ -53,7 +54,7 @@ public class PostsController {
         try{
             postsService.deletePost(id);
             return ResponseEntity.accepted().build();
-        } catch (Exception e) {
+        } catch (PostNotFoundException e) {
             return ResponseEntity.noContent().build();
         }
     }

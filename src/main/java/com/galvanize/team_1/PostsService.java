@@ -1,5 +1,7 @@
 package com.galvanize.team_1;
 
+import java.util.Optional;
+
 public class PostsService {
 
     PostsRepository postsRepository;
@@ -21,9 +23,21 @@ public class PostsService {
     }
 
     public Post updatePost(String id, String title, String body) {
+        Optional<Post> optionalPost = postsRepository.findById(id);
+        if (optionalPost.isPresent()) {
+            optionalPost.get().setBody(body);
+            optionalPost.get().setTitle(title);
+            return postsRepository.save(optionalPost.get());
+        }
         return null;
     }
 
     public void deletePost(String id) {
+        Optional<Post> optionalPost = postsRepository.findById(id);
+        if (optionalPost.isPresent()) {
+            postsRepository.delete(optionalPost.get());
+        } else {
+            throw new PostNotFoundException();
+        }
     }
 }
