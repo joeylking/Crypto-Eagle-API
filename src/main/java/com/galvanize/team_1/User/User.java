@@ -8,15 +8,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String userName;
+    private String username;
     private String password;
     private String bio;
 
-    public User(String userName, String password, String bio) {
-        this.userName = userName;
+    public User(String username, String password, String bio) {
+        this.username = username;
         this.password = password;
         this.bio = bio;
     }
+
+    public User() {}
 
     public int getId() {
         return id;
@@ -26,12 +28,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getPassword() {
@@ -53,7 +55,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "username =" + userName  +
+                "username =" + username  +
                 "\n,bio = " + bio +
                 '}';
     }

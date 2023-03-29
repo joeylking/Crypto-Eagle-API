@@ -17,7 +17,7 @@ public class UserService {
     public User updateUser(int id, String userName, String password, String bio) {
         Optional<User> optionalUser = userRepository.findById(id);
         if(optionalUser.isPresent()){
-            optionalUser.get().setUserName(userName);
+            optionalUser.get().setUsername(userName);
             optionalUser.get().setPassword(password);
             optionalUser.get().setBio(bio);
             return userRepository.save(optionalUser.get());
@@ -46,7 +46,14 @@ public class UserService {
             return new UsersList(users);
         }
         return null;
+    }
 
+    public UsersList getAllUsers() {
+        List<User> allUsers = userRepository.findAll();
+        if(!allUsers.isEmpty()) {
+            return new UsersList(allUsers);
+        }
+        return null;
     }
 
     public User getUser(String userName, String password) {
