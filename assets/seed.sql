@@ -36,7 +36,7 @@ create table comments (
     body TEXT,
     foreign key (user_id) REFERENCES users(id),
     foreign key (post_id) REFERENCES posts(id)
-)
+);
 
 insert into users (username, password, bio) values ('user1', 'user1', 'quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce');
 insert into users (username, password, bio) values ('user2', 'user2', 'dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero non mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel enim sit amet nunc viverra dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum');
