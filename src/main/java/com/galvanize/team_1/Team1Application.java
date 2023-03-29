@@ -1,4 +1,4 @@
-package com.galvanize.team_1.posts;
+package com.galvanize.team_1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
