@@ -28,7 +28,7 @@ public class PostsController {
 
     @GetMapping("/api/posts/{id}")
 
-    public ResponseEntity<Post> getPost(@PathVariable String id){
+    public ResponseEntity<Post> getPost(@PathVariable Integer id){
         try {
             Post post = postsService.getPost(id);
             return ResponseEntity.ok(post);
@@ -38,7 +38,7 @@ public class PostsController {
     }
 
     @PatchMapping("/api/posts/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable String id,
+    public ResponseEntity<Post> updatePost(@PathVariable Integer id,
                                            @RequestBody UpdatePostRequest update){
         try {
             Post post = postsService.updatePost(id, update.getTitle(), update.getBody());
@@ -51,7 +51,7 @@ public class PostsController {
     }
 
     @DeleteMapping("/api/posts/{id}")
-    public ResponseEntity deletePost(@PathVariable String id){
+    public ResponseEntity deletePost(@PathVariable Integer id){
         try{
             postsService.deletePost(id);
             return ResponseEntity.accepted().build();

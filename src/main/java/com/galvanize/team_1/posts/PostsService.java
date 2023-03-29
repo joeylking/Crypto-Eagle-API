@@ -17,7 +17,7 @@ public class PostsService {
         return new PostsList(postsRepository.findAll());
     }
 
-    public Post getPost(String id) {
+    public Post getPost(Integer id) {
         return postsRepository.findById(id).orElse(null);
     }
 
@@ -25,7 +25,7 @@ public class PostsService {
         return postsRepository.save(post);
     }
 
-    public Post updatePost(String id, String title, String body) {
+    public Post updatePost(Integer id, String title, String body) {
         Optional<Post> optionalPost = postsRepository.findById(id);
         if (optionalPost.isPresent()) {
             optionalPost.get().setBody(body);
@@ -35,7 +35,7 @@ public class PostsService {
         return null;
     }
 
-    public void deletePost(String id) {
+    public void deletePost(Integer id) {
         Optional<Post> optionalPost = postsRepository.findById(id);
         if (optionalPost.isPresent()) {
             postsRepository.delete(optionalPost.get());
