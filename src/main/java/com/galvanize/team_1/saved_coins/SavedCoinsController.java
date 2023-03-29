@@ -1,5 +1,6 @@
 package com.galvanize.team_1.saved_coins;
 
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,15 @@ public class SavedCoinsController {
         HttpStatus status = savedCoins == null ? HttpStatus.NO_CONTENT : HttpStatus.OK;
 
         return new ResponseEntity<>(savedCoins, status);
+    }
 
+    @GetMapping("/user/{userid}")
+    public ResponseEntity<SavedCoinsList> getAllSavedCoinsByUser(@PathVariable String userid){
+        SavedCoinsList savedCoinsList = savedCoinsService.getAllSavedCoinsByUser(userid);
+
+        HttpStatus status =  savedCoinsList.getSavedCoinsList().isEmpty() ?  HttpStatus.NO_CONTENT : HttpStatus.OK;
+
+        return new ResponseEntity<>(savedCoinsList, status);
     }
 
     @PostMapping("/add")

@@ -34,4 +34,8 @@ public class SavedCoinsService {
             savedCoinsRepository.delete(optionalSavedCoins.get());
         }
     }
+
+    public SavedCoinsList getAllSavedCoinsByUser(String userid) {
+        return new SavedCoinsList(savedCoinsRepository.findAllByUserId(Integer.parseInt(userid)));
+    }
 }
