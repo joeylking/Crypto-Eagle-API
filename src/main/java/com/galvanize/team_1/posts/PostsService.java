@@ -18,7 +18,12 @@ public class PostsService {
     }
 
     public Post getPost(Integer id) {
-        return postsRepository.findById(id).orElse(null);
+        Optional<Post> optionalPost = postsRepository.findById(id);
+        if (optionalPost.isPresent()) {
+            return optionalPost.get();
+        } else {
+            throw new PostNotFoundException();
+        }
     }
 
     public Post addPost(Post post){

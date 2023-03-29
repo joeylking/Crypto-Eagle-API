@@ -31,7 +31,7 @@ public class PostsController {
     public ResponseEntity<Post> getPost(@PathVariable Integer id){
         try {
             Post post = postsService.getPost(id);
-            return post == null ? ResponseEntity.noContent().build() : ResponseEntity.ok(post);
+            return ResponseEntity.ok(post);
         } catch (PostNotFoundException e){
             return ResponseEntity.noContent().build();
         }
