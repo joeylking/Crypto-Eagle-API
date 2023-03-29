@@ -1,7 +1,10 @@
 package com.galvanize.team_1.posts;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
+@Service
 public class PostsService {
 
     PostsRepository postsRepository;
