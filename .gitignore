@@ -4,7 +4,6 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-seed.sql
 src/main/resources/application.properties
 
 ### STS ###
@@ -20,10 +19,13 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
+.properties
+#src/main/resources/application.properties
 .idea
 *.iws
 *.iml
 *.ipr
+*.sql
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
