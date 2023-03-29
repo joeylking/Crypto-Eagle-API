@@ -9,12 +9,24 @@ public class Post {
     private int id;
     private String title;
     private String body;
-    private final int userID;
+
+    @Column(name = "user_id")
+    private int userID;
+
+    public Post(){}
 
     public Post(String title, String body, int userID){
         this.title = title;
         this.body = body;
         this.userID = userID;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getUserID() {
+        return userID;
     }
 
     public void setTitle(String title) {
