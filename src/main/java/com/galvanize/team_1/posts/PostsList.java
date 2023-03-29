@@ -21,4 +21,12 @@ public class PostsList {
     public boolean isEmpty() {
         return this.posts.isEmpty();
     }
+
+    @Override
+    public String toString(){
+        return "PostsList{" +
+                "posts=" + posts +
+                '}';
+    }
+
 }
