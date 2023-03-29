@@ -14,7 +14,7 @@ public class CommentService {
     }
 
     public CommentList getAllCommentsByPostId(String id){
-        return commentRepository.findAllByPostId(Integer.parseInt(id));
+        return new CommentList(commentRepository.findAllByPostId(Integer.parseInt(id)));
     }
 
     public Comment addCommentToPost(Comment comment) {

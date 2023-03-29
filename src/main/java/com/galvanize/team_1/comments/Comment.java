@@ -9,12 +9,15 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int user_id;
-    private int post_id;
+    @Column(name = "post_id")
+    private int postId;
     private String body;
 
-    public Comment(int user_id, int post_id, String body) {
+    public Comment(){}
+
+    public Comment(int user_id, int postId, String body) {
         this.user_id = user_id;
-        this.post_id = post_id;
+        this.postId = postId;
         this.body = body;
     }
 
@@ -34,12 +37,12 @@ public class Comment {
         this.user_id = user_id;
     }
 
-    public int getPost_id() {
-        return post_id;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setPost_id(int post_id) {
-        this.post_id = post_id;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public String getBody() {
