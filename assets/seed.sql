@@ -26,7 +26,7 @@ create table posts (
 	title VARCHAR(255),
 	body TEXT,
 	user_id INT,
-	foreign key (user_id) REFERENCES users(id),
+	foreign key (user_id) REFERENCES users(id)
 );
 
 create table comments (
