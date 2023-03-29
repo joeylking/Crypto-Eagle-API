@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
-    CommentList findAllByPostId(int parseInt);
+    CommentList findAllByPostId(int id);
 }
