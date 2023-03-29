@@ -8,15 +8,14 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int user_id;
-    @Column(name = "post_id")
+    private int userId;
     private int postId;
     private String body;
 
     public Comment(){}
 
-    public Comment(int user_id, int postId, String body) {
-        this.user_id = user_id;
+    public Comment(int userId, int postId, String body) {
+        this.userId = userId;
         this.postId = postId;
         this.body = body;
     }
@@ -29,12 +28,12 @@ public class Comment {
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getPostId() {
