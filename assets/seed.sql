@@ -2,6 +2,7 @@ drop database if exists capstone;
 create database capstone;
 use capstone;
 
+drop table if exists comments;
 drop table if exists posts;
 drop table if exists saved_coins;
 drop table if exists users;
@@ -16,14 +17,25 @@ create table users (
 create table saved_coins (
 	id INT auto_increment primary key,
 	currency_name VARCHAR(20),
-	user_id INT
+	user_id INT,
+	foreign key (user_id) REFERENCES users(id)
 );
 
 create table posts (
 	id INT auto_increment primary key,
 	title VARCHAR(255),
 	body TEXT,
-	user_id INT
+	user_id INT,
+	foreign key (user_id) REFERENCES users(id)
+);
+
+create table comments (
+    id INT auto_increment primary key,
+    user_id INT NOT NULL,
+    post_id INT NOT NULL,
+    body TEXT,
+    foreign key (user_id) REFERENCES users(id),
+    foreign key (post_id) REFERENCES posts(id)
 );
 
 insert into users (username, password, bio) values ('user1', 'user1', 'quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce');
@@ -579,4 +591,103 @@ insert into posts (title, body, user_id) values ('ipsum primis in faucibus orci 
 insert into posts (title, body, user_id) values ('eget eros elementum pellentesque quisque porta volutpat erat quisque erat eros viverra eget congue eget semper', 'felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu est congue elementum in', 18);
 insert into posts (title, body, user_id) values ('sapien a libero nam dui proin leo odio porttitor id consequat in', 'sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec dui luctus rutrum nulla', 5);
 
-
+insert into comments (user_id, post_id, body) values (29, 96, 'sociis natoque penatibus et magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum sagittis sapien cum sociis natoque penatibus et');
+insert into comments (user_id, post_id, body) values (35, 32, 'hac habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius nulla');
+insert into comments (user_id, post_id, body) values (50, 11, 'in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac');
+insert into comments (user_id, post_id, body) values (49, 20, 'interdum eu tincidunt in leo maecenas pulvinar lobortis est phasellus sit amet erat nulla tempus vivamus');
+insert into comments (user_id, post_id, body) values (35, 17, 'eu felis fusce posuere felis sed lacus morbi sem mauris laoreet ut');
+insert into comments (user_id, post_id, body) values (27, 80, 'dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla');
+insert into comments (user_id, post_id, body) values (50, 81, 'posuere felis sed lacus morbi sem mauris laoreet ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed');
+insert into comments (user_id, post_id, body) values (47, 6, 'amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi');
+insert into comments (user_id, post_id, body) values (28, 72, 'lobortis est phasellus sit amet erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin eu mi');
+insert into comments (user_id, post_id, body) values (9, 84, 'eget tempus vel pede morbi porttitor lorem id ligula suspendisse');
+insert into comments (user_id, post_id, body) values (33, 70, 'enim lorem ipsum dolor sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id');
+insert into comments (user_id, post_id, body) values (15, 95, 'non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus');
+insert into comments (user_id, post_id, body) values (17, 53, 'quisque erat eros viverra eget congue eget semper rutrum nulla nunc purus phasellus in felis');
+insert into comments (user_id, post_id, body) values (5, 71, 'vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia');
+insert into comments (user_id, post_id, body) values (39, 35, 'etiam faucibus cursus urna ut tellus nulla ut erat id mauris vulputate elementum nullam varius');
+insert into comments (user_id, post_id, body) values (49, 71, 'habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum');
+insert into comments (user_id, post_id, body) values (8, 14, 'nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at nibh in hac habitasse platea dictumst aliquam augue');
+insert into comments (user_id, post_id, body) values (9, 56, 'ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent');
+insert into comments (user_id, post_id, body) values (26, 66, 'scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed');
+insert into comments (user_id, post_id, body) values (33, 14, 'ut massa volutpat convallis morbi odio odio elementum eu interdum eu tincidunt in leo');
+insert into comments (user_id, post_id, body) values (46, 36, 'sem fusce consequat nulla nisl nunc nisl duis bibendum felis sed interdum venenatis');
+insert into comments (user_id, post_id, body) values (46, 22, 'vel nulla eget eros elementum pellentesque quisque porta volutpat erat quisque erat');
+insert into comments (user_id, post_id, body) values (25, 93, 'rutrum rutrum neque aenean auctor gravida sem praesent id massa id nisl venenatis lacinia aenean sit amet justo');
+insert into comments (user_id, post_id, body) values (18, 1, 'consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum');
+insert into comments (user_id, post_id, body) values (46, 82, 'aliquam erat volutpat in congue etiam justo etiam pretium iaculis justo in hac');
+insert into comments (user_id, post_id, body) values (36, 51, 'est et tempus semper est quam pharetra magna ac consequat metus sapien ut nunc');
+insert into comments (user_id, post_id, body) values (28, 77, 'at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur');
+insert into comments (user_id, post_id, body) values (37, 79, 'ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis');
+insert into comments (user_id, post_id, body) values (49, 31, 'auctor gravida sem praesent id massa id nisl venenatis lacinia aenean');
+insert into comments (user_id, post_id, body) values (5, 17, 'vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula condimentum curabitur in libero ut');
+insert into comments (user_id, post_id, body) values (8, 13, 'odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut');
+insert into comments (user_id, post_id, body) values (27, 69, 'rutrum nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet');
+insert into comments (user_id, post_id, body) values (23, 30, 'ullamcorper purus sit amet nulla quisque arcu libero rutrum ac lobortis vel dapibus at diam nam');
+insert into comments (user_id, post_id, body) values (49, 35, 'turpis nec euismod scelerisque quam turpis adipiscing lorem vitae mattis');
+insert into comments (user_id, post_id, body) values (30, 54, 'suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis');
+insert into comments (user_id, post_id, body) values (34, 50, 'nibh in quis justo maecenas rhoncus aliquam lacus morbi quis tortor id nulla ultrices aliquet maecenas');
+insert into comments (user_id, post_id, body) values (15, 72, 'scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc');
+insert into comments (user_id, post_id, body) values (23, 82, 'fringilla rhoncus mauris enim leo rhoncus sed vestibulum sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor');
+insert into comments (user_id, post_id, body) values (21, 48, 'potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis augue luctus');
+insert into comments (user_id, post_id, body) values (26, 60, 'odio curabitur convallis duis consequat dui nec nisi volutpat eleifend donec');
+insert into comments (user_id, post_id, body) values (33, 4, 'sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at');
+insert into comments (user_id, post_id, body) values (45, 65, 'eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus');
+insert into comments (user_id, post_id, body) values (4, 98, 'ut at dolor quis odio consequat varius integer ac leo pellentesque ultrices mattis odio donec vitae nisi nam ultrices libero');
+insert into comments (user_id, post_id, body) values (7, 23, 'mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem');
+insert into comments (user_id, post_id, body) values (24, 63, 'sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at');
+insert into comments (user_id, post_id, body) values (4, 3, 'scelerisque quam turpis adipiscing lorem vitae mattis nibh ligula nec sem');
+insert into comments (user_id, post_id, body) values (22, 44, 'ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi');
+insert into comments (user_id, post_id, body) values (15, 30, 'nunc donec quis orci eget orci vehicula condimentum curabitur in');
+insert into comments (user_id, post_id, body) values (28, 87, 'sagittis sapien cum sociis natoque penatibus et magnis dis parturient montes');
+insert into comments (user_id, post_id, body) values (29, 37, 'aenean sit amet justo morbi ut odio cras mi pede malesuada in');
+insert into comments (user_id, post_id, body) values (21, 79, 'enim blandit mi in porttitor pede justo eu massa donec dapibus duis at velit eu');
+insert into comments (user_id, post_id, body) values (44, 90, 'maecenas leo odio condimentum id luctus nec molestie sed justo pellentesque viverra pede ac diam');
+insert into comments (user_id, post_id, body) values (40, 51, 'justo nec condimentum neque sapien placerat ante nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet');
+insert into comments (user_id, post_id, body) values (29, 18, 'est donec odio justo sollicitudin ut suscipit a feugiat et eros');
+insert into comments (user_id, post_id, body) values (10, 36, 'convallis nunc proin at turpis a pede posuere nonummy integer non velit donec diam neque vestibulum');
+insert into comments (user_id, post_id, body) values (33, 23, 'nisi at nibh in hac habitasse platea dictumst aliquam augue quam sollicitudin vitae consectetuer eget rutrum');
+insert into comments (user_id, post_id, body) values (25, 51, 'pede justo eu massa donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum');
+insert into comments (user_id, post_id, body) values (10, 29, 'aliquam convallis nunc proin at turpis a pede posuere nonummy integer non');
+insert into comments (user_id, post_id, body) values (30, 67, 'et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida');
+insert into comments (user_id, post_id, body) values (48, 88, 'diam neque vestibulum eget vulputate ut ultrices vel augue vestibulum');
+insert into comments (user_id, post_id, body) values (16, 21, 'quis turpis sed ante vivamus tortor duis mattis egestas metus aenean fermentum donec ut');
+insert into comments (user_id, post_id, body) values (46, 29, 'sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in');
+insert into comments (user_id, post_id, body) values (41, 8, 'donec semper sapien a libero nam dui proin leo odio porttitor id consequat in');
+insert into comments (user_id, post_id, body) values (38, 54, 'donec pharetra magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque');
+insert into comments (user_id, post_id, body) values (4, 96, 'ante nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor');
+insert into comments (user_id, post_id, body) values (22, 32, 'nisi venenatis tristique fusce congue diam id ornare imperdiet sapien urna pretium nisl ut volutpat sapien');
+insert into comments (user_id, post_id, body) values (33, 59, 'rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue');
+insert into comments (user_id, post_id, body) values (15, 7, 'id nisl venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada in imperdiet et commodo vulputate');
+insert into comments (user_id, post_id, body) values (26, 52, 'metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget eleifend luctus');
+insert into comments (user_id, post_id, body) values (26, 99, 'consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna');
+insert into comments (user_id, post_id, body) values (46, 47, 'nisi eu orci mauris lacinia sapien quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer');
+insert into comments (user_id, post_id, body) values (39, 64, 'risus auctor sed tristique in tempus sit amet sem fusce consequat nulla nisl nunc nisl duis bibendum felis sed');
+insert into comments (user_id, post_id, body) values (37, 53, 'donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit id');
+insert into comments (user_id, post_id, body) values (46, 94, 'interdum in ante vestibulum ante ipsum primis in faucibus orci luctus');
+insert into comments (user_id, post_id, body) values (12, 32, 'risus semper porta volutpat quam pede lobortis ligula sit amet eleifend pede libero');
+insert into comments (user_id, post_id, body) values (43, 55, 'curabitur gravida nisi at nibh in hac habitasse platea dictumst');
+insert into comments (user_id, post_id, body) values (38, 92, 'congue diam id ornare imperdiet sapien urna pretium nisl ut');
+insert into comments (user_id, post_id, body) values (6, 71, 'nulla tellus in sagittis dui vel nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis');
+insert into comments (user_id, post_id, body) values (49, 46, 'sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at');
+insert into comments (user_id, post_id, body) values (28, 28, 'nibh quisque id justo sit amet sapien dignissim vestibulum vestibulum ante ipsum primis in');
+insert into comments (user_id, post_id, body) values (20, 100, 'metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia');
+insert into comments (user_id, post_id, body) values (42, 10, 'luctus ultricies eu nibh quisque id justo sit amet sapien');
+insert into comments (user_id, post_id, body) values (29, 23, 'felis sed interdum venenatis turpis enim blandit mi in porttitor pede justo eu massa donec dapibus duis at');
+insert into comments (user_id, post_id, body) values (9, 87, 'hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula');
+insert into comments (user_id, post_id, body) values (27, 71, 'in felis donec semper sapien a libero nam dui proin leo odio porttitor id');
+insert into comments (user_id, post_id, body) values (25, 9, 'morbi non quam nec dui luctus rutrum nulla tellus in sagittis dui vel nisl duis');
+insert into comments (user_id, post_id, body) values (3, 65, 'donec semper sapien a libero nam dui proin leo odio porttitor id consequat in consequat');
+insert into comments (user_id, post_id, body) values (12, 65, 'mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing');
+insert into comments (user_id, post_id, body) values (38, 18, 'ut massa quis augue luctus tincidunt nulla mollis molestie lorem quisque ut erat curabitur gravida nisi at');
+insert into comments (user_id, post_id, body) values (47, 14, 'in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus cum sociis natoque penatibus et magnis');
+insert into comments (user_id, post_id, body) values (1, 74, 'dui maecenas tristique est et tempus semper est quam pharetra magna ac consequat metus sapien');
+insert into comments (user_id, post_id, body) values (18, 77, 'malesuada in imperdiet et commodo vulputate justo in blandit ultrices enim lorem ipsum dolor');
+insert into comments (user_id, post_id, body) values (2, 38, 'massa id lobortis convallis tortor risus dapibus augue vel accumsan tellus nisi eu');
+insert into comments (user_id, post_id, body) values (43, 54, 'molestie hendrerit at vulputate vitae nisl aenean lectus pellentesque eget nunc');
+insert into comments (user_id, post_id, body) values (34, 64, 'at velit vivamus vel nulla eget eros elementum pellentesque quisque porta volutpat erat quisque erat eros');
+insert into comments (user_id, post_id, body) values (22, 37, 'donec dapibus duis at velit eu est congue elementum in hac habitasse platea dictumst morbi vestibulum velit id pretium');
+insert into comments (user_id, post_id, body) values (47, 65, 'lacus at velit vivamus vel nulla eget eros elementum pellentesque quisque porta');
+insert into comments (user_id, post_id, body) values (1, 15, 'tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est');
+insert into comments (user_id, post_id, body) values (14, 51, 'sit amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien');
+insert into comments (user_id, post_id, body) values (2, 55, 'venenatis lacinia aenean sit amet justo morbi ut odio cras mi pede malesuada');

@@ -1,0 +1,12 @@
+image: openjdk:11
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - ./gradlew assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
