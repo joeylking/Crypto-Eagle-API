@@ -14,6 +14,7 @@ public class SavedCoinsService {
         this.savedCoinsRepository = savedCoinsRepository;
     }
 
+
     public SavedCoinsList getAllSavedCoins() {
         return new SavedCoinsList(savedCoinsRepository.findAll());
     }

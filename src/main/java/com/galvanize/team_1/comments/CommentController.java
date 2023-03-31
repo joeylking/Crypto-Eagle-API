@@ -14,6 +14,13 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+    @GetMapping(value = {"", "/"})
+    public ResponseEntity<CommentList> getAllComments(){
+        CommentList commentList = commentService.getAllComments();
+        HttpStatus status = commentList.getCommentList().isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
+        return new ResponseEntity<>(commentList, status);
+    }
+
     @GetMapping("/post/{id}")
     public ResponseEntity<CommentList> getAllCommentsByPostId(@PathVariable String id){
         CommentList commentList = commentService.getAllCommentsByPostId(id);
