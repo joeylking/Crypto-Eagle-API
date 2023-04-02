@@ -2,6 +2,7 @@ package com.galvanize.team_1.comments;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -41,6 +42,16 @@ public class CommentService {
         } else {
             commentRepository.delete(optionalComment.get());
         }
+    }
 
+    public void deleteAllCommentsByPostId(String id){
+        List<Comment> commentList = commentRepository.findAllByPostId(Integer.parseInt(id));
+
+        if(commentList.isEmpty()){
+            throw new NoSuchElementException("Comments not found.");
+        }
+        else {
+            commentRepository.deleteAll(commentList);
+        }
     }
 }
