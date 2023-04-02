@@ -46,11 +46,7 @@ public class CommentService {
 
     public void deleteAllCommentsByPostId(String id){
         List<Comment> commentList = commentRepository.findAllByPostId(Integer.parseInt(id));
-
-        if(commentList.isEmpty()){
-            throw new NoSuchElementException("Comments not found.");
-        }
-        else {
+        if(!commentList.isEmpty()){
             commentRepository.deleteAll(commentList);
         }
     }

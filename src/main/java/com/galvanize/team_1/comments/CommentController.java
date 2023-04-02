@@ -60,11 +60,9 @@ public class CommentController {
     public ResponseEntity<String> deleteAllCommentsByPostId(@PathVariable String id) {
         try {
             commentService.deleteAllCommentsByPostId(id);
-
         } catch (Exception e) {
             return new ResponseEntity<>("Unable to delete all comments with post id: " + id, HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity<>("Successfully deleted all comments with post id: " + id, HttpStatus.ACCEPTED);
     }
 
