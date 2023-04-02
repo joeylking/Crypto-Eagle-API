@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/comments")
 @CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/comments")
 public class CommentController {
     private CommentService commentService;
     public CommentController(CommentService commentService) {
@@ -52,7 +52,7 @@ public class CommentController {
             return new ResponseEntity<>("Delete unsuccessful.", HttpStatus.NOT_FOUND);
 
         }
-        return new ResponseEntity<>("Delete successful.", HttpStatus.ACCEPTED);
+            return new ResponseEntity<>("Delete successful.", HttpStatus.ACCEPTED);
     }
 
 }
