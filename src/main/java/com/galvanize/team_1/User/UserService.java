@@ -37,7 +37,15 @@ public class UserService {
 
 
     public User addUser(User user) {
-        return userRepository.save(user);
+        Optional<User> userNameCheck = userRepository.findByUsername(user.getUsername());
+        Optional<User> userIDCheck =userRepository.findById(user.getId());
+        if(userNameCheck.isPresent()){
+            throw new UserCreationException("Username already in use.");
+        } else if (userIDCheck.isPresent()){
+            throw new UserCreationException("A user with that ID already exists.");
+        } else {
+            return userRepository.save(user);
+        }
     }
 
     public UsersList getUsers(String userName) {
