@@ -1,4 +1,9 @@
 package com.galvanize.team_1.User;
+import net.bytebuddy.asm.Advice;
+
+import java.time.LocalDate;
+import java.util.Date;
+
 
 import javax.persistence.*;
 
@@ -11,22 +16,31 @@ public class User {
     private String username;
     private String password;
     private String bio;
+    private LocalDate date;
+    private String email;
 
-    public User(String username, String password, String bio) {
-        this.username = username;
-        this.password = password;
-        this.bio = bio;
+
+
+    public String getEmail() {
+        return email;
     }
 
-    public User() {}
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User() {
+        this.date = LocalDate.now();
+    }
+    public LocalDate getDate() {return date;}
+
+    public void setDate(LocalDate date) {this.date = date;}
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) {this.id = id;}
 
     public String getUsername() {
         return username;
@@ -56,6 +70,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "username =" + username  +
+                "email =" + email  +
+                "date joined =" + date  +
                 "\n,bio = " + bio +
                 '}';
     }
