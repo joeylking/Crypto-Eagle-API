@@ -50,4 +50,9 @@ public class CommentService {
             commentRepository.deleteAll(commentList);
         }
     }
+
+    public CommentList getUserComments(int userId) {
+        CommentList userComments = new CommentList(commentRepository.findAllByUserId(userId));
+        return userComments;
+    }
 }

@@ -41,7 +41,7 @@ public class UserService {
     }
 
     public UsersList getUsers(String userName) {
-        List<User> users = userRepository.findByUsername(userName);
+        List<User> users = userRepository.findAllByUsername(userName);
         if(!users.isEmpty()) {
             return new UsersList(users);
         }
@@ -58,5 +58,19 @@ public class UserService {
 
     public User getUser(String userName, String password) {
         return userRepository.findByUsernameAndPassword(userName, password).orElse(null);
+    }
+
+    public User getUserById(int userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(optionalUser.isPresent()){
+            return userRepository.save(optionalUser.get());
+        } else throw new UserNotFoundException("User not found");
+    }
+
+    public User getUserByUsername(String username) {
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        if(optionalUser.isPresent()){
+            return optionalUser.get();
+        } else throw new UserNotFoundException("User not found");
     }
 }
