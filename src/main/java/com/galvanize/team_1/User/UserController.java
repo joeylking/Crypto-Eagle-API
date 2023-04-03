@@ -42,7 +42,13 @@ public class UserController {
     }
 
     @PostMapping("/api/createuser")
-    public User createUser(@RequestBody User user) { return userService.addUser(user); }
+    public ResponseEntity createUser(@RequestBody User user) {
+        try {
+            return ResponseEntity.ok(userService.addUser(user));
+        } catch (UserCreationException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
     @DeleteMapping("/api/deleteuser/{id}")
     public ResponseEntity deleteUser(@PathVariable int id) {
