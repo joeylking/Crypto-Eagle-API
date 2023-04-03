@@ -1,5 +1,6 @@
 package com.galvanize.team_1.User;
 
+import com.galvanize.team_1.UserProfile.UserProfile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

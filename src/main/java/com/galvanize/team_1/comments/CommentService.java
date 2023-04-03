@@ -43,4 +43,9 @@ public class CommentService {
         }
 
     }
+
+    public CommentList getUserComments(int userId) {
+        CommentList userComments = new CommentList(commentRepository.findAllByUserId(userId));
+        return userComments;
+    }
 }
