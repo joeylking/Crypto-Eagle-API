@@ -8,11 +8,13 @@ import com.galvanize.team_1.comments.CommentService;
 import com.galvanize.team_1.posts.PostsList;
 import com.galvanize.team_1.posts.PostsService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserProfileController {
 
     UserService userService;
