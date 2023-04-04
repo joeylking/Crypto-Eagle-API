@@ -1,5 +1,6 @@
 package com.galvanize.team_1.posts;
 
+import com.galvanize.team_1.comments.CommentList;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -47,5 +48,10 @@ public class PostsService {
         } else {
             throw new PostNotFoundException();
         }
+    }
+
+    public PostsList getUserPosts(int userID) {
+        PostsList userPosts = new PostsList(postsRepository.findAllByUserID(userID));
+        return userPosts;
     }
 }

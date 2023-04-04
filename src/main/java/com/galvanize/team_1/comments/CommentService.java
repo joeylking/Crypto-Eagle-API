@@ -2,6 +2,7 @@ package com.galvanize.team_1.comments;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -13,6 +14,9 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
+    public CommentList getAllComments(){
+        return new CommentList(commentRepository.findAll());
+    }
     public CommentList getAllCommentsByPostId(String id){
         return new CommentList(commentRepository.findAllByPostId(Integer.parseInt(id)));
     }
@@ -38,6 +42,17 @@ public class CommentService {
         } else {
             commentRepository.delete(optionalComment.get());
         }
+    }
 
+    public void deleteAllCommentsByPostId(String id){
+        List<Comment> commentList = commentRepository.findAllByPostId(Integer.parseInt(id));
+        if(!commentList.isEmpty()){
+            commentRepository.deleteAll(commentList);
+        }
+    }
+
+    public CommentList getUserComments(int userId) {
+        CommentList userComments = new CommentList(commentRepository.findAllByUserId(userId));
+        return userComments;
     }
 }
