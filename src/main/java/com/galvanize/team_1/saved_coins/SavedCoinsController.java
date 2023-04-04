@@ -35,7 +35,7 @@ public class SavedCoinsController {
     }
 
     @GetMapping("/user/{userid}")
-    public ResponseEntity<SavedCoinsList> getAllSavedCoinsByUser(@PathVariable String userid){
+    public ResponseEntity<SavedCoinsList> getAllSavedCoinsByUser(@PathVariable int userid){
         SavedCoinsList savedCoinsList = savedCoinsService.getAllSavedCoinsByUser(userid);
 
         HttpStatus status =  savedCoinsList.getSavedCoinsList().isEmpty() ?  HttpStatus.NO_CONTENT : HttpStatus.OK;

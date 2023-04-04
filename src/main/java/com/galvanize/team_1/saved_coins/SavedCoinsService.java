@@ -36,7 +36,7 @@ public class SavedCoinsService {
         }
     }
 
-    public SavedCoinsList getAllSavedCoinsByUser(String userid) {
-        return new SavedCoinsList(savedCoinsRepository.findAllByUserId(Integer.parseInt(userid)));
+    public SavedCoinsList getAllSavedCoinsByUser(int userid) {
+        return new SavedCoinsList(savedCoinsRepository.findAllByUserId(userid));
     }
 }
