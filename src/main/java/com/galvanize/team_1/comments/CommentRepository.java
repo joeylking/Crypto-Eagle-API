@@ -10,4 +10,6 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 //    @Query(value = "SELECT * FROM comments WHERE post_id = 1;", nativeQuery = true)
     List<Comment> findAllByPostId(int id);
+
+    List<Comment> findAllByUserId(int userId);
 }

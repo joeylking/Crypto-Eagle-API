@@ -6,16 +6,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/comments")
 @CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/comments")
 public class CommentController {
     private CommentService commentService;
+
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
 
+    @GetMapping(value = {"", "/"})
+    public ResponseEntity<CommentList> getAllComments() {
+        CommentList commentList = commentService.getAllComments();
+        HttpStatus status = commentList.getCommentList().isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
+        return new ResponseEntity<>(commentList, status);
+    }
+
     @GetMapping("/post/{id}")
-    public ResponseEntity<CommentList> getAllCommentsByPostId(@PathVariable String id){
+    public ResponseEntity<CommentList> getAllCommentsByPostId(@PathVariable String id) {
         CommentList commentList = commentService.getAllCommentsByPostId(id);
 
         HttpStatus status = commentList.getCommentList().isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
@@ -24,12 +32,12 @@ public class CommentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Comment> addCommentToPost(@RequestBody Comment comment){
+    public ResponseEntity<Comment> addCommentToPost(@RequestBody Comment comment) {
         return new ResponseEntity<>(commentService.addCommentToPost(comment), HttpStatus.OK);
     }
 
     @PatchMapping("/edit/{id}")
-    public ResponseEntity<Comment> editComment(@RequestBody Comment comment, @PathVariable String id){
+    public ResponseEntity<Comment> editComment(@RequestBody Comment comment, @PathVariable String id) {
         Comment updatedComment = commentService.editComment(comment, id);
 
         HttpStatus status = updatedComment == null ? HttpStatus.NOT_FOUND : HttpStatus.OK;
@@ -41,11 +49,21 @@ public class CommentController {
     public ResponseEntity<String> deleteComment(@PathVariable String id) {
         try {
             commentService.deleteComment(id);
-        } catch(Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>("Delete unsuccessful.", HttpStatus.NOT_FOUND);
 
         }
         return new ResponseEntity<>("Delete successful.", HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/delete-all/post/{id}")
+    public ResponseEntity<String> deleteAllCommentsByPostId(@PathVariable String id) {
+        try {
+            commentService.deleteAllCommentsByPostId(id);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Unable to delete all comments with post id: " + id, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>("Successfully deleted all comments with post id: " + id, HttpStatus.ACCEPTED);
     }
 
 }
