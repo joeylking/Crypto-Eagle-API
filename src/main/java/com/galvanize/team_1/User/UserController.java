@@ -5,14 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     UserService userService;
 
     public UserController(UserService userService) { this.userService = userService; }
 
-    @PostMapping("/api/getuser")
+    @GetMapping("/api/getuser")
     public ResponseEntity<User> getUser(@RequestBody User loginUser) {
         try {
             User user = userService.getUser(loginUser.getUsername(), loginUser.getPassword());
