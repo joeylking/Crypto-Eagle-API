@@ -1,6 +1,7 @@
 package com.galvanize.team_1.posts;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "posts")
@@ -9,9 +10,9 @@ public class Post {
     private int id;
     private String title;
     private String body;
-
-    @Column(name = "user_id")
+    private LocalDate date;
     private int userID;
+    private String username;
 
     public Post(){}
 
@@ -21,12 +22,32 @@ public class Post {
         this.userID = userID;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public int getId() {
         return id;
     }
 
     public int getUserID() {
         return userID;
+    }
+
+    public void setUserID(int id){
+        this.userID = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setTitle(String title) {
