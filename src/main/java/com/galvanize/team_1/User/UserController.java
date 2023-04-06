@@ -4,6 +4,7 @@ import com.galvanize.team_1.UserProfile.UserProfile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UserController {
 
@@ -11,7 +12,7 @@ public class UserController {
 
     public UserController(UserService userService) { this.userService = userService; }
 
-    @GetMapping("/api/getuser")
+    @PostMapping("/api/getuser")
     public ResponseEntity<User> getUser(@RequestBody User loginUser) {
         try {
             User user = userService.getUser(loginUser.getUsername(), loginUser.getPassword());
@@ -63,9 +64,10 @@ public class UserController {
     @PutMapping("/api/updateuser/{id}")
     public User updateUser(@PathVariable int id,
                                @RequestBody User update) {
-        User user = userService.updateUser(id, update.getUsername(), update.getPassword(), update.getBio());
+        User user = userService.updateUser(id, update.getPassword(), update.getBio(), update.getEmail());
         user.setPassword(update.getPassword());
         user.setBio(update.getBio());
+        user.setEmail(update.getEmail());
         return user;
     }
 

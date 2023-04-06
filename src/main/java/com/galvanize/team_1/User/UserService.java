@@ -14,12 +14,13 @@ public class UserService {
     }
 
 
-    public User updateUser(int id, String userName, String password, String bio) {
+    public User updateUser(int id, String password, String bio, String email) {
         Optional<User> optionalUser = userRepository.findById(id);
         if(optionalUser.isPresent()){
-            optionalUser.get().setUsername(userName);
             optionalUser.get().setPassword(password);
             optionalUser.get().setBio(bio);
+            optionalUser.get().setEmail(email);
+
             return userRepository.save(optionalUser.get());
         }
         return null;
