@@ -11,15 +11,15 @@ public class Post {
     private String title;
     private String body;
     private LocalDate date;
-    private int userID;
+    private int userId;
     private String username;
 
     public Post(){}
 
-    public Post(String title, String body, int userID){
+    public Post(String title, String body, int userId){
         this.title = title;
         this.body = body;
-        this.userID = userID;
+        this.userId = userId;
     }
 
     public LocalDate getDate() {
@@ -34,12 +34,12 @@ public class Post {
         return id;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserID(int id){
-        this.userID = id;
+    public void setUserId(int id){
+        this.userId = id;
     }
 
     public String getUsername() {
@@ -71,7 +71,7 @@ public class Post {
         return "Post{" +
                 "title=" + title +
                 ", body='" + body + '\'' +
-                ", userID='" + userID + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 

@@ -50,8 +50,8 @@ public class PostsService {
         }
     }
 
-    public PostsList getUserPosts(int userID) {
-        PostsList userPosts = new PostsList(postsRepository.findAllByUserID(userID));
+    public PostsList getUserPosts(int userId) {
+        PostsList userPosts = new PostsList(postsRepository.findAllByUserId(userId));
         return userPosts;
     }
 }
