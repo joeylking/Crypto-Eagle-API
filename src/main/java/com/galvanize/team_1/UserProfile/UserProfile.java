@@ -5,9 +5,13 @@ import com.galvanize.team_1.comments.CommentList;
 import com.galvanize.team_1.posts.PostsList;
 import com.galvanize.team_1.saved_coins.SavedCoinsList;
 
+import java.time.LocalDate;
+
 public class UserProfile {
     private String username;
     private String userBio;
+    private String email;
+    private LocalDate date;
     private PostsList userPosts;
     private CommentList userComments;
     private SavedCoinsList userSavedCoins;
@@ -17,6 +21,8 @@ public class UserProfile {
     public UserProfile(User user){
         this.username = user.getUsername();
         this.userBio = user.getBio();
+        this.email = user.getEmail();
+        this.date = user.getDate();
     }
     public UserProfile(User user, PostsList userPosts, CommentList userComments, SavedCoinsList userSavedCoins){
         this.username = user.getUsername();
@@ -24,6 +30,22 @@ public class UserProfile {
         this.userPosts = userPosts;
         this.userComments = userComments;
         this.userSavedCoins = userSavedCoins;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getUsername() {
