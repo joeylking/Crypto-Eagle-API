@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface PostsRepository extends JpaRepository<Post, Integer> {
     Optional<Post> findById(String id);
 
-    List<Post> findAllByUserID(int userID);
+    List<Post> findAllByUserId(int userId);
 }
