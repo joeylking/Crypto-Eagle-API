@@ -1,5 +1,7 @@
 package com.galvanize.team_1.User;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +17,20 @@ public class UserService {
 
 
     public User updateUser(int id, String password, String bio, String email) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
         Optional<User> optionalUser = userRepository.findById(id);
         if(optionalUser.isPresent()){
-            optionalUser.get().setPassword(password);
-            optionalUser.get().setBio(bio);
-            optionalUser.get().setEmail(email);
+            User dbUser = optionalUser.get();
+            if(!bcrypt.matches(password + dbUser.getSalt(), dbUser.getPassword())){
+                String salt = BCrypt.gensalt();
+                String hashedPassword = bcrypt.encode(password + salt);
+                dbUser.setSalt(salt);
+                dbUser.setPassword(hashedPassword);
+            }
+            dbUser.setBio(bio);
+            dbUser.setEmail(email);
 
-            return userRepository.save(optionalUser.get());
+            return userRepository.save(dbUser);
         }
         return null;
 
@@ -45,6 +54,11 @@ public class UserService {
         } else if (userIDCheck.isPresent()){
             throw new UserCreationException("A user with that ID already exists.");
         } else {
+            String salt = BCrypt.gensalt();
+            BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+            String hashedPassword = bcrypt.encode(user.getPassword() + salt);
+            user.setSalt(salt);
+            user.setPassword(hashedPassword);
             return userRepository.save(user);
         }
     }
@@ -65,8 +79,16 @@ public class UserService {
         return null;
     }
 
-    public User getUser(String userName, String password) {
-        return userRepository.findByUsernameAndPassword(userName, password).orElse(null);
+    public User getUser(String username, String password) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        if(optionalUser.isPresent()){
+            User dbUser = optionalUser.get();
+            if(bcrypt.matches(password + dbUser.getSalt(), dbUser.getPassword())){
+                return dbUser;
+            } else throw new UserAuthenticationException("Wrong password");
+        }
+        throw new UserNotFoundException("User not found");
     }
 
     public User getUserById(int userId) {

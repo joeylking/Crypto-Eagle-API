@@ -13,14 +13,14 @@ public class UserController {
     public UserController(UserService userService) { this.userService = userService; }
 
     @PostMapping("/api/getuser")
-    public ResponseEntity<User> getUser(@RequestBody User loginUser) {
+    public ResponseEntity getUser(@RequestBody User loginUser) {
         try {
             User user = userService.getUser(loginUser.getUsername(), loginUser.getPassword());
-            if(user == null) throw new UserNotFoundException("User with given parameters does not exist");
-
             return ResponseEntity.ok(user);
         } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
+        } catch (UserAuthenticationException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
@@ -65,9 +65,6 @@ public class UserController {
     public User updateUser(@PathVariable int id,
                                @RequestBody User update) {
         User user = userService.updateUser(id, update.getPassword(), update.getBio(), update.getEmail());
-        user.setPassword(update.getPassword());
-        user.setBio(update.getBio());
-        user.setEmail(update.getEmail());
         return user;
     }
 
