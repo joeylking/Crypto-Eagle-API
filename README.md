@@ -56,8 +56,10 @@ Choose a self-explaining name for your project.
 
 ## Description
 ### About Crypto Eagle:
+
 **A space for the conversation about cryptocurrency**
-User of Crypto Eagle can track their favorite cryptocurrencies' performance and exchange ideas 
+
+Users of Crypto Eagle can track their favorite cryptocurrencies' performance and exchange ideas 
 about them with other members of our community.
 ---
 ### How Our App Works:
