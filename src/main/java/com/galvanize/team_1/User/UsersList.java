@@ -20,6 +20,14 @@ public class UsersList {
         this.users = users;
     }
 
+    public UsersList hideHashAndSalt(){
+        users.forEach(user -> {
+            user.setPassword("");
+            user.setSalt("");
+        });
+        return this;
+    }
+
     @Override
     public String toString() {
         return "UsersList{" +

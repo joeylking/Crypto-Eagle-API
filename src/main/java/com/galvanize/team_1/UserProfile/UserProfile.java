@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class UserProfile {
     private String username;
-    private String userBio;
+    private String bio;
     private String email;
     private LocalDate date;
     private PostsList userPosts;
@@ -20,13 +20,13 @@ public class UserProfile {
 
     public UserProfile(User user){
         this.username = user.getUsername();
-        this.userBio = user.getBio();
+        this.bio = user.getBio();
         this.email = user.getEmail();
         this.date = user.getDate();
     }
     public UserProfile(User user, PostsList userPosts, CommentList userComments, SavedCoinsList userSavedCoins){
         this.username = user.getUsername();
-        this.userBio = user.getBio();
+        this.bio = user.getBio();
         this.userPosts = userPosts;
         this.userComments = userComments;
         this.userSavedCoins = userSavedCoins;
@@ -52,8 +52,8 @@ public class UserProfile {
         return username;
     }
 
-    public String getUserBio() {
-        return userBio;
+    public String getBio() {
+        return bio;
     }
 
     public PostsList getUserPosts() {
