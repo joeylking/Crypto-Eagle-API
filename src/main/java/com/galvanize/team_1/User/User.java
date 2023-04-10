@@ -15,9 +15,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-
     private String salt;
-
     private String bio;
     private LocalDate date;
     private String email;
