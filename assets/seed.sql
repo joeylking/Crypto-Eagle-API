@@ -18,7 +18,7 @@ create table saved_coins (
 	id INT auto_increment primary key,
 	currency_name VARCHAR(20),
 	user_id INT,
-	foreign key (user_id) REFERENCES users(id)
+	foreign key (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 create table posts (
@@ -26,7 +26,7 @@ create table posts (
 	title VARCHAR(255),
 	body TEXT,
 	user_id INT,
-	foreign key (user_id) REFERENCES users(id)
+	foreign key (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 create table comments (
@@ -34,8 +34,8 @@ create table comments (
     user_id INT NOT NULL,
     post_id INT NOT NULL,
     body TEXT,
-    foreign key (user_id) REFERENCES users(id),
-    foreign key (post_id) REFERENCES posts(id)
+    foreign key (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    foreign key (post_id) REFERENCES posts(id) ON DELETE CASCADE
 );
 
 insert into users (username, password, bio) values ('user1', 'user1', 'quam sollicitudin vitae consectetuer eget rutrum at lorem integer tincidunt ante vel ipsum praesent blandit lacinia erat vestibulum sed magna at nunc commodo placerat praesent blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare consequat lectus in est risus auctor sed tristique in tempus sit amet sem fusce');
