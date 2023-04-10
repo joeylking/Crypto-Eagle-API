@@ -17,13 +17,20 @@ public class UserService {
 
 
     public User updateUser(int id, String password, String bio, String email) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
         Optional<User> optionalUser = userRepository.findById(id);
         if(optionalUser.isPresent()){
-            optionalUser.get().setPassword(password);
-            optionalUser.get().setBio(bio);
-            optionalUser.get().setEmail(email);
+            User dbUser = optionalUser.get();
+            if(!bcrypt.matches(password + dbUser.getSalt(), dbUser.getPassword())){
+                String salt = BCrypt.gensalt();
+                String hashedPassword = bcrypt.encode(password + salt);
+                dbUser.setSalt(salt);
+                dbUser.setPassword(hashedPassword);
+            }
+            dbUser.setBio(bio);
+            dbUser.setEmail(email);
 
-            return userRepository.save(optionalUser.get());
+            return userRepository.save(dbUser);
         }
         return null;
 

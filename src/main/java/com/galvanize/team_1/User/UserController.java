@@ -65,9 +65,6 @@ public class UserController {
     public User updateUser(@PathVariable int id,
                                @RequestBody User update) {
         User user = userService.updateUser(id, update.getPassword(), update.getBio(), update.getEmail());
-        user.setPassword(update.getPassword());
-        user.setBio(update.getBio());
-        user.setEmail(update.getEmail());
         return user;
     }
 
