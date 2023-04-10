@@ -4,7 +4,7 @@ import com.galvanize.team_1.UserProfile.UserProfile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 public class UserController {
 
