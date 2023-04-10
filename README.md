@@ -55,7 +55,25 @@ Every project is different, so consider which of these sections apply to yours. 
 Choose a self-explaining name for your project.
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+### About Crypto Eagle:
+**A space for the conversation about cryptocurrency**
+User of Crypto Eagle can track their favorite cryptocurrencies' performance and exchange ideas 
+about them with other members of our community.
+---
+### How Our App Works:
+- We consume the CoinCap API to retrieve up-to-date cryptocurrency information
+- Users can create accounts and select the coins they would like to follow for display on their 
+profile
+- As members of our community, users can share their thoughts on the crypto world and start 
+conversations
+---
+### Technologies Used:
+- Languages: Java, JavaScript, MySQL
+- Frameworks: Spring Boot/JPA, React JS
+- Deployment: AWS Elastic Beanstalk/RDS, Netlify
+---
+### Demo:
+[title][https://crypto-eagle.netlify.app]
 
 ## Badges
 On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
