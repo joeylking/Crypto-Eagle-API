@@ -1,5 +1,6 @@
 package com.galvanize.team_1.User;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +46,9 @@ public class UserService {
         } else if (userIDCheck.isPresent()){
             throw new UserCreationException("A user with that ID already exists.");
         } else {
+//            BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+//            String encryptedPassword = bcrypt.encode(user.getPassword());
+//            user.setPassword(encryptedPassword);
             return userRepository.save(user);
         }
     }
