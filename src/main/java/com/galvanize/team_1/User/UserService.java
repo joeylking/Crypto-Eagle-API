@@ -1,5 +1,6 @@
 package com.galvanize.team_1.User;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -46,9 +47,11 @@ public class UserService {
         } else if (userIDCheck.isPresent()){
             throw new UserCreationException("A user with that ID already exists.");
         } else {
-//            BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
-//            String encryptedPassword = bcrypt.encode(user.getPassword());
-//            user.setPassword(encryptedPassword);
+            String salt = BCrypt.gensalt();
+            BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+            String hashedPassword = bcrypt.encode(user.getPassword() + salt);
+            user.setSalt(salt);
+            user.setPassword(hashedPassword);
             return userRepository.save(user);
         }
     }
@@ -69,8 +72,16 @@ public class UserService {
         return null;
     }
 
-    public User getUser(String userName, String password) {
-        return userRepository.findByUsernameAndPassword(userName, password).orElse(null);
+    public User getUser(String username, String password) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        Optional<User> optionalUser = userRepository.findByUsername(username);
+        if(optionalUser.isPresent()){
+            User dbUser = optionalUser.get();
+            if(bcrypt.matches(password + dbUser.getSalt(), dbUser.getPassword())){
+                return dbUser;
+            } else throw new UserAuthenticationException("Wrong password");
+        }
+        throw new UserNotFoundException("User not found");
     }
 
     public User getUserById(int userId) {

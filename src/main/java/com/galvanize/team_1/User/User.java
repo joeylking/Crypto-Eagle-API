@@ -15,10 +15,12 @@ public class User {
     private int id;
     private String username;
     private String password;
+
+    private String salt;
+
     private String bio;
     private LocalDate date;
     private String email;
-
 
 
     public String getEmail() {
@@ -32,8 +34,8 @@ public class User {
     public User() {
         this.date = LocalDate.now();
     }
-    public LocalDate getDate() {return date;}
 
+    public LocalDate getDate() {return date;}
     public void setDate(LocalDate date) {this.date = date;}
 
     public int getId() {
@@ -56,6 +58,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getBio() {

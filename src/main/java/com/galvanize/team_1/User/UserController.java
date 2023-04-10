@@ -13,14 +13,14 @@ public class UserController {
     public UserController(UserService userService) { this.userService = userService; }
 
     @PostMapping("/api/getuser")
-    public ResponseEntity<User> getUser(@RequestBody User loginUser) {
+    public ResponseEntity getUser(@RequestBody User loginUser) {
         try {
             User user = userService.getUser(loginUser.getUsername(), loginUser.getPassword());
-            if(user == null) throw new UserNotFoundException("User with given parameters does not exist");
-
             return ResponseEntity.ok(user);
         } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
+        } catch (UserAuthenticationException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
