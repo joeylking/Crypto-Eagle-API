@@ -15,8 +15,8 @@ public class UserController {
     @PostMapping("/api/getuser")
     public ResponseEntity getUser(@RequestBody User loginUser) {
         try {
-            User returnUser = userService.getUser(loginUser.getUsername(), loginUser.getPassword());
-            return ResponseEntity.ok(returnUser.hideHashAndSalt());
+            UserDTO returnUser = userService.getUser(loginUser.getUsername(), loginUser.getPassword());
+            return ResponseEntity.ok(returnUser);
         } catch (UserNotFoundException e) {
             return ResponseEntity.notFound().build();
         } catch (UserAuthenticationException e){
@@ -26,25 +26,23 @@ public class UserController {
 
     @GetMapping("/api/searchusers")
     public ResponseEntity<UsersList> getUsers(@RequestParam(required = true) String username) {
-        UsersList searchList;
-        searchList = userService.getUsers(username);
+        UsersList searchList = userService.getUsers(username);
         return searchList.isEmpty() ? ResponseEntity.noContent().build() :
-                ResponseEntity.ok(searchList.hideHashAndSalt());
+                ResponseEntity.ok(searchList);
     }
 
     @GetMapping("/api/users")
     public ResponseEntity<UsersList> getAllUsers() {
-        UsersList allUsers;
-        allUsers = userService.getAllUsers();
+        UsersList allUsers = userService.getAllUsers();
         return allUsers.isEmpty() ? ResponseEntity.noContent().build() :
-                ResponseEntity.ok(allUsers.hideHashAndSalt());
+                ResponseEntity.ok(allUsers);
     }
 
     @PostMapping("/api/createuser")
     public ResponseEntity createUser(@RequestBody User user) {
         try {
-            User returnUser = userService.addUser(user);
-            return ResponseEntity.ok(returnUser.hideHashAndSalt());
+            UserDTO returnUser = UserDTO.mapper(userService.addUser(user));
+            return ResponseEntity.ok(returnUser);
         } catch (UserCreationException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

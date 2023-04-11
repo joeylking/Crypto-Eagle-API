@@ -66,7 +66,7 @@ public class UserService {
     public UsersList getUsers(String userName) {
         List<User> users = userRepository.findAllByUsername(userName);
         if(!users.isEmpty()) {
-            return new UsersList(users);
+            return UsersList.mapper(users);
         }
         return null;
     }
@@ -74,27 +74,27 @@ public class UserService {
     public UsersList getAllUsers() {
         List<User> allUsers = userRepository.findAll();
         if(!allUsers.isEmpty()) {
-            return new UsersList(allUsers);
+            return UsersList.mapper(allUsers);
         }
         return null;
     }
 
-    public User getUser(String username, String password) {
+    public UserDTO getUser(String username, String password) {
         BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
         Optional<User> optionalUser = userRepository.findByUsername(username);
         if(optionalUser.isPresent()){
             User dbUser = optionalUser.get();
             if(bcrypt.matches(password + dbUser.getSalt(), dbUser.getPassword())){
-                return dbUser;
+                return UserDTO.mapper(dbUser);
             } else throw new UserAuthenticationException("Wrong password");
         }
         throw new UserNotFoundException("User not found");
     }
 
-    public User getUserById(int userId) {
+    public UserDTO getUserById(int userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
         if(optionalUser.isPresent()){
-            return userRepository.save(optionalUser.get());
+            return UserDTO.mapper(userRepository.save(optionalUser.get()));
         } else throw new UserNotFoundException("User not found");
     }
 
