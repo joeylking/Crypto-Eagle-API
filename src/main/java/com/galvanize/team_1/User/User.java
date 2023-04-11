@@ -74,6 +74,12 @@ public class User {
         this.bio = bio;
     }
 
+    public User hideHashAndSalt(){
+        this.setSalt("");
+        this.setPassword("");
+        return this;
+    }
+
     @Override
     public String toString() {
         return "User{" +

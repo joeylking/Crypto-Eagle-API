@@ -1,6 +1,7 @@
 package com.galvanize.team_1.UserProfile;
 
 import com.galvanize.team_1.User.User;
+import com.galvanize.team_1.User.UserDTO;
 import com.galvanize.team_1.User.UserNotFoundException;
 import com.galvanize.team_1.User.UserService;
 import com.galvanize.team_1.comments.CommentList;
@@ -35,7 +36,7 @@ public class UserProfileController {
     public ResponseEntity<UserProfile> getUserProfile(@PathVariable String username){
         try {
             User user = userService.getUserByUsername(username);
-            UserProfile userProfile = new UserProfile(user);
+            UserProfile userProfile = new UserProfile(UserDTO.mapper(user));
             userProfile.setUserPosts(postsService.getUserPosts(user.getId()));
             userProfile.setUserComments(commentService.getUserComments(user.getId()));
             userProfile.setUserSavedCoins(savedCoinsService.getAllSavedCoinsByUser(user.getId()));

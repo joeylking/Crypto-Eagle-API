@@ -6,18 +6,27 @@ import java.util.List;
 
 public class UsersList {
 
-    private List<User> users;
+    private List<UserDTO> users;
 
     public UsersList() { this.users = new ArrayList<>(); }
 
-    public UsersList(List<User> users) { this.users = users; }
+    public UsersList(List<UserDTO> users) { this.users = users; }
 
-    public List<User> getUsers() {
+    public List<UserDTO> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<UserDTO> users) {
         this.users = users;
+    }
+
+    public static UsersList mapper(List<User> users){
+        List<UserDTO> usersDTO = new ArrayList<>();
+        users.forEach(user -> {
+            UserDTO userDTO = UserDTO.mapper(user);
+            usersDTO.add(userDTO);
+        });
+        return new UsersList(usersDTO);
     }
 
     @Override
